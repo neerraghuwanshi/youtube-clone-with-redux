@@ -1,7 +1,9 @@
 import React from 'react'
 import VideoList from './VideoList'
 import Iframe from './Iframe'
+import {connect} from 'react-redux';
 import '../css/videoContainer.css'
+import {GetVideosError} from '../actions/actions'
 
 import axios from 'axios';
 
@@ -11,22 +13,30 @@ class VideoContainer extends React.Component{
     state = {selectedVideo:{}, videos:{}, shouldRender:false}
 
     fetchVideos = async (searchTerm) => {
-        const response = await axios.get('https://www.googleapis.com//youtube/v3/search',{
+        await axios.get('https://www.googleapis.com//youtube/v3/search',{
             params: {
                 part:'snippet',
                 maxResults:5,
-                key:'AIzaSyCPiOYHaZW38JJPKUJOWt7gt-fcALtzsiM',
+                key:'AIzaSyB5-qFTlsVZBy9d-phTMiCtu2OM-hMSmO4',
                 q:searchTerm
-            }})
-            this.setState({videos:response.data,
-                selectedVideo:response.data.items[0], shouldRender:true})
-                console.log(response.data)   
+            }}).then(
+                    response=>
+                    this.setState({videos:response.data,
+                    selectedVideo:response.data.items[0], shouldRender:true}))
+                .catch(error=>GetVideosError(error))
         }
         
     componentDidMount(){
         this.fetchVideos(this.props.query)
     }
-        
+    
+    componentDidUpdate(prevProps) {
+        if (prevProps !== this.props){
+            this.fetchVideos(this.props.query)
+        }
+    }
+    
+
     onClickHandler = (item) => {
         this.setState({selectedVideo:item})
     }
@@ -47,4 +57,5 @@ class VideoContainer extends React.Component{
     }
 }
 
-export default VideoContainer
+
+export default connect(null,{GetVideosError})(VideoContainer)

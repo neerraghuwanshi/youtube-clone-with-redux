@@ -1,7 +1,6 @@
 import React from 'react';
 import {Provider} from 'react-redux'
 import {BrowserRouter as  Router, Route, Switch } from 'react-router-dom';
-import createHistory from '../utils/History';
 import Trending from './Trending';
 import Home from './Home';
 import Navbar from './Navbar';
@@ -14,7 +13,7 @@ class App extends React.Component{
     render(){
         return( 
                 <Provider store={store}>
-                <Router history={createHistory}>
+                <Router >
                 <Navbar handleClick={this.handleClick}/>
                 <Switch>
                 <Route exact path="/"  component={Home}/>

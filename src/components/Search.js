@@ -1,11 +1,18 @@
-import React from 'react'
-import '../css/Search.css'
+import React from 'react' 
+import VideoContainer from './VideoContainer'
+import {connect} from 'react-redux';
 
 class Search extends React.Component{
- 
+
     render(){
-        return(<div>Search</div>)
+        return <VideoContainer query={this.props.searchData} />
     }
 } 
 
-export default Search
+const mapStateToProps = state => {
+    return {
+        searchData : state.searchData
+    }
+}
+
+export default connect(mapStateToProps)(Search)

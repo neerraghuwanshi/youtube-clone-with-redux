@@ -1,23 +1,17 @@
-import {FETCH_VIDEOS_PENDING, FETCH_VIDEOS_SUCCESS, FETCH_VIDEOS_ERROR} from './actionTypes'
+import {GET_SEARCH_DATA, GET_VIDEOS_ERROR} from './actionTypes'
 
-export const fetchVideosPending =  () => {
+
+export const GetSearchData = (searchData) => {
     return {
-        type: FETCH_VIDEOS_PENDING
-        
+        type: GET_SEARCH_DATA,
+        searchData
     }
 }
 
-export const fetchVideosSuccess = (data) => {
+export const GetVideosError = (error) => {
     return {
-        type: FETCH_VIDEOS_SUCCESS,
-        payload: data
-    }
-}
-
-export const fetchVideosError = (error) => {
-    return {
-        type: FETCH_VIDEOS_ERROR,
-        payload: error
+        type: GET_VIDEOS_ERROR,
+        error
     }
 }
 

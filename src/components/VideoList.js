@@ -6,7 +6,7 @@ class VideoList extends React.Component{
     render(){
         const {items, onClickHandler} = this.props
         const videoList = items.map(
-            (item)=><VideoItem src={item.snippet.thumbnails.medium.url} onClickHandler={onClickHandler} key={item.snippet.title} item={item} alt={item.snippet.title}/>)
+            (item,index)=><VideoItem src={item.snippet.thumbnails.medium.url} onClickHandler={onClickHandler} key={index} item={item} alt={item.snippet.title}/>)
             
     return(<div>{videoList}</div>)
 

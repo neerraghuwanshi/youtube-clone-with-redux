@@ -1,9 +1,10 @@
 import React from 'react';
+import VideoConatainer from './VideoContainer'
 
 class Home extends React.Component{
     render(){
         return(
-            <div>Home</div>
+            <VideoConatainer query={'legends are made iron man'} />
         )
     }
 }
