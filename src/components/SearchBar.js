@@ -13,6 +13,7 @@ class SearchBar extends React.Component{
         const onSubmitHandler = (event) => {
             event.preventDefault() 
             dispatch(GetSearchData(searchTerm))
+            localStorage.setItem('searchTerm',searchTerm)
             history.push({pathname:'/search'})
             }
 
@@ -32,7 +33,5 @@ const mapDispatchToProps = (dispatch) => {
         dispatch
     }
 }
-
-
 
 export default connect(null,mapDispatchToProps)(withRouter(SearchBar))

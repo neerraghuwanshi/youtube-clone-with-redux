@@ -7,12 +7,14 @@ import {GetVideosError} from '../actions/actions'
 
 import axios from 'axios';
 
-
 class VideoContainer extends React.Component{
     
     state = {selectedVideo:{}, videos:{}, shouldRender:false}
 
+    
     fetchVideos = async (searchTerm) => {
+
+        const {dispatch} = this.props
         await axios.get('https://www.googleapis.com//youtube/v3/search',{
             params: {
                 part:'snippet',
@@ -23,7 +25,7 @@ class VideoContainer extends React.Component{
                     response=>
                     this.setState({videos:response.data,
                     selectedVideo:response.data.items[0], shouldRender:true}))
-                .catch(error=>GetVideosError(error))
+                .catch((error)=>dispatch(GetVideosError(error)))
         }
         
     componentDidMount(){
@@ -35,7 +37,6 @@ class VideoContainer extends React.Component{
             this.fetchVideos(this.props.query)
         }
     }
-    
 
     onClickHandler = (item) => {
         this.setState({selectedVideo:item})
@@ -57,5 +58,11 @@ class VideoContainer extends React.Component{
     }
 }
 
+const mapDispatchToProps = dispatch =>{
+    return {
+        dispatch
+    }
+}
 
-export default connect(null,{GetVideosError})(VideoContainer)
+
+export default connect(null,mapDispatchToProps)(VideoContainer)
