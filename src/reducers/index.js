@@ -1,4 +1,5 @@
 import {GET_VIDEOS_ERROR,GET_SEARCH_DATA} from '../actions/actionTypes'
+
 export const initialState = { searchData:localStorage.getItem('searchTerm'), error:{} }
 
 export const reducer = (state = initialState, action) => {
